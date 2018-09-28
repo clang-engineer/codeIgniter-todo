@@ -20,3 +20,4 @@ application/logs/*
 user_guide/
 tests/
 system/
+database.php
