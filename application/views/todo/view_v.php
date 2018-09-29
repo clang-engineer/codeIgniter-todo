@@ -13,6 +13,7 @@
 </head>
 <body>
 <div id="main">
+
 	<header id="header" data-role="header" data-position="fixed"><!-- Header Start -->
 		<blockquote>
 			<p>만들면서 배우는 CodeIgniter</p>
@@ -27,42 +28,29 @@
 	</nav><!-- gnb End -->
 	<article id="board_area">
 		<header>
-			<h1>Todo 목록</h1>
+			<h1>Todo 조회</h1>
 		</header>
 		<table cellspacing="0" cellpadding="0" class="table table-striped">
 			<thead>
 				<tr>
-					<th scope="col">번호</th>
-					<th scope="col">내용</th>
-					<th scope="col">시작일</th>
-					<th scope="col">종료일</th>
+					<th scope="col"><?php echo $views[0]->id;?> 번 할일</th>
+					<th scope="col">시작일 : <?php echo $views[0]->created_on;?></th>
+					<th scope="col">종료일 : <?php echo $views[0]->due_date;?></th>
 				</tr>
 			</thead>
 			<tbody>
-<?php
-foreach ($list as $lt) {
-    ?>
 				<tr>
-					<th scope="row">
-						<?php echo $lt->id; ?>
+					<th colspan="3">
+						<?php echo $views[0]->content;?>
 					</th>
-					<td><a rel="external" href="/CodeIgniter-todo/index.php/main/view/<?php echo $lt->id; ?>"><?php echo $lt->content; ?></a></td>
-					<td><time datetime="<?php echo mdate("%Y-%M-%j", human_to_unix($lt->created_on)); ?>"><?php echo $lt->created_on; ?></time></td>
-					<td><time datetime="<?php echo mdate("%Y-%M-%j", human_to_unix($lt->due_date)); ?>"><?php echo $lt->due_date; ?></time></td>
 				</tr>
-<?php
-}
-?>
-
 			</tbody>
 			<tfoot>
 				<tr>
-					<th colspan="4"><a href="/todo/index.php/main/write/" class="btn btn-success">쓰기</a></th>
+					<th colspan="4"><a href="/todo/index.php/main/lists/" class="btn btn-primary">목록</a> <a href="/todo/index.php/main/delete/<?php echo $this->uri->segment(3);?>" class="btn btn-danger">삭제</a> <a href="/todo/index.php/main/write" class="btn btn-success">쓰기</a></th>
 				</tr>
 			</tfoot>
 		</table>
-		<div><p></p></div>
-
 	</article>
 
 	<footer id="footer">
