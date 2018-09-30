@@ -29,4 +29,28 @@ class Main extends CI_Controller
         $data['views']=$this->todo_m->get_view($id);
         $this->load->view('todo/view_v', $data);
     }
+
+    public function write()
+    {
+        if ($_POST) {
+            $content=$this->input->post('content', true);
+            $created_on=$this->input->post('created_on', true);
+            $due_date=$this->input->post('due_date', true);
+
+            $this->todo_m->insert_todo($content, $created_on, $due_date);
+
+            redirect('/main/lists');
+
+            exit;
+        } else {
+            $this->load->view('todo/write_v');
+        }
+    }
+
+    function delete()
+    {
+      $id=$this->uri->segment(3);
+      $this->todo_m->delete_todo($id);
+      redirect('/main/lists');
+    }
 }
